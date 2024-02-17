@@ -2,7 +2,7 @@
 class SingletonRequester implements Runnable {
 
 
-    public SingletonRequester() {
+    public SingletonRequester(Singleton instance) {
 
     }
 
