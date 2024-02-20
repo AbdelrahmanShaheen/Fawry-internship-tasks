@@ -28,4 +28,9 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .selectEmployeeById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("employee with id [%s] not found".formatted(id)));
     }
+
+    @Override
+    public List<Employee> getEmployeesByDepartmentId(Long departmentId) {
+        return employeeDao.selectEmployeeByDepartmentId(departmentId);
+    }
 }

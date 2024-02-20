@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/employees")
@@ -27,4 +28,8 @@ public class EmployeeController {
     public Employee getEmployee(@PathVariable(value = "employeeId") Long employeeId){
         return employeeService.getEmployeeById(employeeId);
     }
+//    @GetMapping("/{departmentId}/employees")
+//    List<Employee> getEmployees(@PathVariable(value = "departmentId") Long departmentId){
+//        return employeeService.getEmployeesByDepartmentId(departmentId);
+//    }
 }

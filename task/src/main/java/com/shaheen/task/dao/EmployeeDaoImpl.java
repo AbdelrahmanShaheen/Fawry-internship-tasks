@@ -23,4 +23,9 @@ public class EmployeeDaoImpl implements EmployeeDao{
     public Optional<Employee> selectEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }
+
+    @Override
+    public List<Employee> selectEmployeeByDepartmentId(Long departmentId) {
+        return employeeRepository.findEmployeesByDepartmentId(departmentId);
+    }
 }
