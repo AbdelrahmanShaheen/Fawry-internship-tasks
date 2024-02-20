@@ -1,12 +1,13 @@
 package com.shaheen.task.controller;
 
+import com.shaheen.task.common.EmployeeD;
 import com.shaheen.task.entity.Employee;
 import com.shaheen.task.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -20,16 +21,20 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    @GetMapping("/")
-    public List<Employee> getEmployees(){
-        return employeeService.getEmployees();
+    @GetMapping("/all")
+    public Page<Employee> getEmployees(Pageable page){
+        return employeeService.getEmployees(page);
     }
     @GetMapping("/{employeeId}")
     public Employee getEmployee(@PathVariable(value = "employeeId") Long employeeId){
         return employeeService.getEmployeeById(employeeId);
     }
-//    @GetMapping("/{departmentId}/employees")
-//    List<Employee> getEmployees(@PathVariable(value = "departmentId") Long departmentId){
-//        return employeeService.getEmployeesByDepartmentId(departmentId);
-//    }
+    @GetMapping("/similar")
+    public List<Employee> getEmployeesWithSimilarName(@Param("name") String name){
+        return employeeService.getEmployeesWithSimilarName(name);
+    }
+    @PostMapping("")
+    public void addEmployee(@RequestBody EmployeeD employee){
+        employeeService.addEmployee(employee);
+    }
 }
